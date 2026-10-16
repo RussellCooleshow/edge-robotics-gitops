@@ -1,0 +1,51 @@
+# Lightweight & Hardened ArgoCD profile for NVIDIA Jetson Edge Node (4GB RAM)
+dex:
+  enabled: false
+
+notifications:
+  enabled: false
+
+applicationSet:
+  enabled: false
+
+global:
+  securityContext:
+    runAsNonRoot: true
+
+controller:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 384Mi
+
+repoServer:
+  resources:
+    requests:
+      cpu: 25m
+      memory: 64Mi
+    limits:
+      cpu: 300m
+      memory: 256Mi
+
+server:
+  extraArgs:
+    - --insecure # TLS termination handled via port-forward / WireGuard tunnel
+  resources:
+    requests:
+      cpu: 25m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+
+redis:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+    limits:
+      cpu: 100m
+      memory: 64Mi
