@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: robot-telemetry
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/RussellCooleshow/edge-robotics-gitops.git'
+    targetRevision: main
+    path: apps/robot-telemetry
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
